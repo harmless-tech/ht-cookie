@@ -6,11 +6,10 @@
   "repository": "https://github.com/harmless-tech/ht-cookie",
   "author": "harmless-tech",
   "license": "MIT",
-  "private": false,
   "scripts": {
-    "build": "webpack --mode=production",
+    "build": "yarn lint && webpack --mode=production",
     "build:dev": "webpack --mode=development",
-    "clean": "yarn autoclean --force && rimraf index.js && rimraf index.d.ts && rimraf .cache",
+    "clean": "rimraf src/index.js && rimraf src/index.d.ts && rimraf .cache",
     "lint": "eslint --ext .ts src/",
     "lint:fix": "yarn lint --fix"
   },

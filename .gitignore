@@ -1,6 +1,11 @@
 node_modules/
-.cache/
+
+.yarn/*
+!.yarn/releases
+
+src/*.js
+src/*.d.ts
 
 package-lock.json
+.pnp.*
 *.log
-*.js
