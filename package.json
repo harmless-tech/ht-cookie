@@ -2,16 +2,17 @@
   "name": "ht-cookie",
   "version": "1.0.0",
   "description": "A simple cookie library with no deps needed.",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/harmless-tech/ht-cookie",
   "author": "harmless-tech",
   "license": "MIT",
   "scripts": {
-    "build": "yarn lint && webpack --mode=production",
+    "build": "yarn clean && yarn lint && webpack --mode=production",
     "build:dev": "webpack --mode=development",
     "clean": "rimraf src/index.js && rimraf src/index.d.ts && rimraf .cache",
     "lint": "eslint --ext .ts src/",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "yarn lint --fix",
+	"test": "yarn build && echo \"Soon!\""
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.14.2",
