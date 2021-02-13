@@ -1,4 +1,3 @@
-
 let IsDirty: boolean = true;
 let CookieCache: string[] = [];
 

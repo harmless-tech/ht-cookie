@@ -1,0 +1,31 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+#TODO Add tests.
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Setup yarn
+        run: npm install -g yarn
+
+      - name: Deps
+        run: yarn install
+
+      - name: Build
+        run: yarn build
