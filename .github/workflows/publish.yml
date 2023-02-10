@@ -78,8 +78,13 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - name: Install Deps
         run: yarn install
+      - name: Token
+        run: |
+          echo "npmAuthToken: $NODE_AUTH_TOKEN" >> .yarnrc.yml
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish
-        run: yarn npm publish --otp $NODE_AUTH_TOKEN
+        run: yarn npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Create Archive
