@@ -83,7 +83,7 @@ jobs:
           env:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         - name: Create Archive
-          run: tar czvf package.tar.gz dist/* index.d.ts README.md LICENSE
+          run: tar czvf package.tar.gz dist/* index.d.ts README.md LICENSE package.json
         - name: Upload to release
           uses: alexellis/upload-assets@0.4.0
           env:

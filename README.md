@@ -1,2 +1,2 @@
 # HT Cookie
-A simple cookie library with no deps needed.
+A very simple cookie and local storage library with no deps.
