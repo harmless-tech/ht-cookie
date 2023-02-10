@@ -1,6 +1,7 @@
 .idea/
 
 node_modules/
+dist/
 
 .yarn/*
 !.yarn/releases
@@ -11,3 +12,5 @@ src/*.d.ts
 package-lock.json
 .pnp.*
 *.log
+
+.DS_Store

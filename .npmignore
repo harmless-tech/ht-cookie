@@ -4,5 +4,5 @@
 !LICENSE
 !package.json
 
-!src/index.js
-!src/index.d.ts
+!dist/
+!index.d.ts

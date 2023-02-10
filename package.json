@@ -1,28 +1,35 @@
 {
   "name": "ht-cookie",
-  "version": "0.0.2",
-  "description": "A simple cookie library with no deps needed.",
-  "main": "src/index.js",
+  "version": "0.1.0",
+  "description": "A very simple cookie and local storage library.",
   "repository": "https://github.com/harmless-tech/ht-cookie",
   "author": "harmless-tech",
   "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "main": "./dist/ht-cookie.umd.cjs",
+  "module": "./dist/ht-cookie.js",
+  "types": "./index.d.ts",
+  "exports": {
+    "types": "./index.d.ts",
+    "import": "./dist/ht-cookie.js",
+    "require": "./dist/ht-cookie.umd.cjs"
+  },
   "scripts": {
-    "build": "yarn clean && yarn lint && webpack --mode=production",
-    "build:dev": "webpack --mode=development",
-    "clean": "rimraf src/index.js && rimraf src/index.d.ts && rimraf .cache",
+    "build": "tsc && vite build",
+    "clean": "rimraf dist",
     "lint": "eslint --ext .ts src/",
-    "lint:fix": "yarn lint --fix",
-    "test": "yarn build && echo \"Soon!\""
+    "lint:fix": "yarn lint --fix"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.25.0",
-    "@typescript-eslint/parser": "^5.25.0",
-    "eslint": "^8.15.0",
-    "rimraf": "^3.0.2",
-    "ts-loader": "^9.3.0",
-    "typescript": "^4.6.4",
-    "webpack": "^5.72.1",
-    "webpack-cli": "^4.9.2"
-  },
-  "packageManager": "yarn@3.2.1"
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.34.0",
+    "rimraf": "^4.1.2",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.1"
+  }
 }
