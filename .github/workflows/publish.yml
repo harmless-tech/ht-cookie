@@ -45,48 +45,48 @@ jobs:
       - name: Build
         run: yarn build
 
-    release:
-      runs-on: ubuntu-latest
-      needs: [lint, build]
-      steps:
-        - uses: actions/checkout@v3
-        - uses: KyoriPowered/action-regex-match@v3
-          id: regex-tag
-          with:
-            text: ${{ github.ref }}
-            regex: '^refs\/tags\/v\d+\.\d+\.\d+$'
-        - name: Create release
-          uses: ncipollo/release-action@v1
-          with:
-            prerelease: ${{ steps.regex-tag.outputs.match == '' }}
-            token: ${{ secrets.GITHUB_TOKEN }}
+  release:
+    runs-on: ubuntu-latest
+    needs: [lint, build]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: KyoriPowered/action-regex-match@v3
+        id: regex-tag
+        with:
+          text: ${{ github.ref }}
+          regex: '^refs\/tags\/v\d+\.\d+\.\d+$'
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          prerelease: ${{ steps.regex-tag.outputs.match == '' }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    publish:
-      runs-on: ubuntu-latest
-      needs: [release]
-      steps:
-        - uses: actions/checkout@v3
-        - uses: actions/cache@v3
-          with:
-            path: |
-              .yarn/cache
-            key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        - name: Setup node
-          uses: actions/setup-node@v3
-          with:
-            node-version: lts/*
-            registry-url: "https://registry.npmjs.org"
-        - name: Install Deps
-          run: yarn install
-        - name: Publish
-          run: yarn npm publish
-          env:
-            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        - name: Create Archive
-          run: tar czvf package.tar.gz dist/* index.d.ts README.md LICENSE package.json
-        - name: Upload to release
-          uses: alexellis/upload-assets@0.4.0
-          env:
-            GITHUB_TOKEN: ${{ github.token }}
-          with:
-            asset_paths: '["package.tar.gz"]'
+  publish:
+    runs-on: ubuntu-latest
+    needs: [release]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: |
+            .yarn/cache
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          registry-url: "https://registry.npmjs.org"
+      - name: Install Deps
+        run: yarn install
+      - name: Publish
+        run: yarn npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Create Archive
+        run: tar czvf package.tar.gz dist/* index.d.ts README.md LICENSE package.json
+      - name: Upload to release
+        uses: alexellis/upload-assets@0.4.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          asset_paths: '["package.tar.gz"]'
