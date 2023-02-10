@@ -79,7 +79,7 @@ jobs:
       - name: Install Deps
         run: yarn install
       - name: Publish
-        run: yarn npm publish
+        run: yarn npm publish --otp $NODE_AUTH_TOKEN
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Create Archive
