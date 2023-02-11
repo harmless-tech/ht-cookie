@@ -1,38 +1,43 @@
 export class Cookie {
-    private static IsDirty: boolean = true;
-    private static Cache: string[] = [];
-
-    public static async setCookie(name: string, data: string, maxAge: number = -1, path: string = "/"): Promise<void> {
+    public static async set(name: string, data: string, maxAge: number = -1, path: string = "/", sameSite: string = "Strict", secure: boolean = true): Promise<void> {
         return new Promise<void>(resolve => {
-            let cStr: string = encodeURIComponent(name) + "=" + encodeURIComponent(data) + "; Path=" + path + "; SameSite=Strict; Secure";
+            let cStr: string = encodeURIComponent(name) + "=" + encodeURIComponent(data) + "; Path=" + path
+                + "; SameSite=" + sameSite;
             if(maxAge > 0)
                 cStr += "; Max-age=" + maxAge;
+            if(secure)
+                cStr += "; Secure";
 
             document.cookie = cStr;
-            this.IsDirty = true;
-
             resolve();
         });
     }
 
-    public static async getCookie(name: string): Promise<string | null> {
+    public static async get(name: string): Promise<string | null> {
         return new Promise<string | null>(resolve => {
             const cName: string = encodeURIComponent(name);
             let cookie: string | null = null;
 
-            // If there is a new cookie update the cache.
-            if(this.IsDirty) {
-                this.Cache = document.cookie.split(";");
-                this.IsDirty = false;
+            let position: number = document.cookie.search(cName + "=");
+            if(position > -1) {
+                let cStr: string = document.cookie.substring(position);
+
+                position = cStr.search(";");
+                if(position > -1)
+                    cStr = cStr.substring(0, position);
+
+                cookie = decodeURIComponent(cStr.split("=")[1]);
             }
 
-            // Find the cookie requested.
-            this.Cache.forEach(val => {
-                if(val.trimStart().startsWith(cName))
-                    cookie = decodeURIComponent(val.split("=")[1]);
-            });
-
             resolve(cookie);
+        });
+    }
+
+    public static async remove(name: string): Promise<void> {
+        return new Promise<void>(resolve => {
+            const cName: string = encodeURIComponent(name);
+            document.cookie = cName + "=; SameSite=None; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+            resolve();
         });
     }
 }

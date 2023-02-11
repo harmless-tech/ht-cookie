@@ -1,11 +1,10 @@
 export declare class Cookie {
-    private static IsDirty;
-    private static Cache;
-    static setCookie(name: string, data: string, maxAge?: number, path?: string): Promise<void>;
-    static getCookie(name: string): Promise<string | null>;
+    public static async set(name: string, data: string, maxAge?: number, path?: string, sameSite?: string, secure?: boolean): Promise<void>;
+    public static async get(name: string): Promise<string | null>;
+    public static async remove(name: string): Promise<void>;
 }
 export declare class Storage {
-    static set(name: string, data: string, maxAge?: number): Promise<void>;
-    static get(name: string): Promise<string | null>;
-    static remove(name: string): Promise<void>;
+    public static async set(name: string, data: string, maxAge?: number): Promise<void>;
+    public static async get(name: string): Promise<string | null>;
+    public static async remove(name: string): Promise<void>;
 }

@@ -46,3 +46,27 @@ jobs:
         run: yarn install
       - name: Build
         run: yarn build
+
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: |
+            .yarn/cache
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+      - name: Install Deps
+        run: yarn install
+      - name: Build
+        run: yarn build
+      - name: Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: |
+            dist
