@@ -69,4 +69,5 @@ jobs:
         with:
           name: dist
           path: |
-            dist
+            dist/*
+            index.d.ts
