@@ -1,6 +1,6 @@
 {
   "name": "ht-cookie",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A very simple cookie and local storage library.",
   "repository": "https://github.com/harmless-tech/ht-cookie",
   "author": "harmless-tech",
