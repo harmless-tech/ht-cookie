@@ -1,7 +1,13 @@
 # HT Cookie
+[![Build](https://github.com/harmless-tech/ht-cookie/actions/workflows/build.yml/badge.svg)](https://github.com/harmless-tech/ht-cookie/actions/workflows/build.yml)
+[![Publish](https://github.com/harmless-tech/ht-cookie/actions/workflows/publish.yml/badge.svg)](https://github.com/harmless-tech/ht-cookie/actions/workflows/publish.yml)
+[![npm](https://img.shields.io/npm/v/ht-cookie)](https://www.npmjs.com/package/ht-cookie)
+
 A very simple cookie and local storage library with no deps.
 
 Less than 1kb when gzipped.
+
+[NPM](https://www.npmjs.com/package/ht-cookie)
 
 ## Add to project
 Using npm:
