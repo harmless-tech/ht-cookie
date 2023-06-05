@@ -2,6 +2,11 @@
   "name": "ht-cookie",
   "version": "0.2.0",
   "description": "A very simple cookie and local storage library.",
+  "keywords": [
+    "cookie",
+    "cookies",
+    "browser"
+  ],
   "repository": "https://github.com/harmless-tech/ht-cookie",
   "author": "harmless-tech",
   "license": "MIT",
