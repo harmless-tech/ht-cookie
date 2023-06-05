@@ -80,7 +80,6 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           prerelease: ${{ steps.regex-tag.outputs.match == '' }}
-          token: ${{ secrets.GITHUB_TOKEN }}
 
   publish:
     runs-on: ubuntu-latest
@@ -119,6 +118,5 @@ jobs:
       - name: Upload release
         uses: ncipollo/release-action@v1
         with:
-          allowUpdates: false
+          allowUpdates: true
           artifacts: "package.tar.gz"
-          token: ${{ secrets.GITHUB_TOKEN }}
