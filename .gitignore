@@ -1,4 +1,6 @@
-.idea/
+/.idea
+/.fleet
+/.vscode
 
 node_modules/
 dist/

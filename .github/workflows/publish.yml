@@ -5,45 +5,66 @@ on:
     tags:
       - v*
 
+env:
+  PNPM_VERSION: 8.5
+
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/cache@v3
-        with:
-          path: |
-            .yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: lts/*
+      - uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - name: Install Deps
-        run: yarn install
+        run: pnpm install
       - name: Lint
-        run: yarn lint
+        run: pnpm run lint
 
   build:
     strategy:
       matrix:
-        node-version: [16, 17, 18, 19]
+        node-version: [16, 18, 20] # https://github.com/nodejs/release#release-schedule
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/cache@v3
-        with:
-          path: |
-            .yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - name: Install Deps
-        run: yarn install
+        run: pnpm install
       - name: Build
-        run: yarn build
+        run: pnpm run build
 
   release:
     runs-on: ubuntu-latest
@@ -66,34 +87,38 @@ jobs:
     needs: [release]
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/cache@v3
-        with:
-          path: |
-            .yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: lts/*
           registry-url: "https://registry.npmjs.org"
+      - uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - name: Install Deps
-        run: yarn install
+        run: pnpm install
       - name: Build
-        run: yarn build
-      - name: Token
-        run: |
-          echo "npmAuthToken: $NODE_AUTH_TOKEN" >> .yarnrc.yml
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm run build
       - name: Publish
-        run: yarn npm publish
+        run: pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Create Archive
         run: tar czvf package.tar.gz dist/* index.d.ts README.md LICENSE package.json
-      - name: Upload to release
-        uses: alexellis/upload-assets@0.4.0
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+      - name: Upload release
+        uses: ncipollo/release-action@v1
         with:
-          asset_paths: '["package.tar.gz"]'
+          allowUpdates: false
+          artifacts: "package.tar.gz"
+          token: ${{ secrets.GITHUB_TOKEN }}
