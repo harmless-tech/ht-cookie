@@ -1,3 +1,7 @@
+/**
+ * See https://developer.mozilla.org/en-US/docs/web/api/document/cookie#write_a_new_cookie
+ * for a explanation of the options.
+ */
 export interface CookieOptions {
     maxAge?: number,
     expires?: Date,
@@ -8,7 +12,19 @@ export interface CookieOptions {
     partitioned?: boolean,
 }
 
+/**
+ * Allows the setting, getting, and removing of cookies.
+ */
 export class Cookie {
+
+    /**
+     * Sets a cookie.
+     *
+     * Option defaults are secure=true and sameSite="lax".
+     *
+     * See https://developer.mozilla.org/en-US/docs/web/api/document/cookie#write_a_new_cookie
+     * for a explanation of the options and their defaults.
+     */
     public static set(name: string, data: string, options: CookieOptions = {}): void {
         let cStr: string = encodeURIComponent(name) + "=" + encodeURIComponent(data);
 
@@ -58,6 +74,14 @@ export class Cookie {
         document.cookie = cName + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT";
     }
 
+    /**
+     * Sets a cookie.
+     *
+     * Option defaults are secure=true and sameSite="lax".
+     *
+     * See https://developer.mozilla.org/en-US/docs/web/api/document/cookie#write_a_new_cookie
+     * for a explanation of the options and their defaults.
+     */
     public static async aSet(name: string, data: string, options: CookieOptions = {}): Promise<void> {
         return new Promise<void>(resolve => {
             this.set(name, data, options);
@@ -79,6 +103,14 @@ export class Cookie {
     }
 }
 
+/**
+ * Allows the setting, getting, and removing of local storage items,
+ * with optional expiry.
+ *
+ * The deletion of items that expiry only happen when you fetch that
+ * item from local storage. If you want to guarantee that an item is
+ * deleted remove it using LocalStorage.remove(NAME) or LocalStorage.aRemove(NAME);
+ */
 export class LocalStorage {
     public static set(name: string, data: string, maxAge: number = -1): void {
         let cStr: string = encodeURIComponent(data);
