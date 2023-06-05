@@ -5,13 +5,16 @@
 
 A very simple cookie and local storage library with no deps.
 
-Less than 1kb when gzipped.
+~1kb when gzipped.
 
 [NPM](https://www.npmjs.com/package/ht-cookie)
 
 ## Add to project
 Using npm:
 ```npm add ht-cookie```
+
+Using pnpm:
+```pnpm add ht-cookie```
 
 Using yarn:
 ```yarn add ht-cookie```
