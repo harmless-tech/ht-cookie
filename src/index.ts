@@ -1,22 +1,47 @@
+export interface CookieOptions {
+    maxAge?: number,
+    expires?: Date,
+    domain?: string,
+    path?: string,
+    sameSite?: "strict" | "lax" | "none",
+    secure?: boolean,
+    partitioned?: boolean,
+}
+
 export class Cookie {
-    public static set(name: string, data: string, maxAge: number = -1, path: string = "/", sameSite: string = "Strict", secure: boolean = true): void {
-        let cStr: string = encodeURIComponent(name) + "=" + encodeURIComponent(data) + "; Path=" + path
-            + "; SameSite=" + sameSite;
-        if(maxAge > 0)
-            cStr += "; Max-age=" + maxAge;
-        if(secure)
-            cStr += "; Secure";
+    public static set(name: string, data: string, options: CookieOptions = {}): void {
+        let cStr: string = encodeURIComponent(name) + "=" + encodeURIComponent(data);
+
+        if(options.maxAge)
+            cStr += ";max-age=" + options.maxAge;
+        if(options.expires)
+            cStr += ";expires=" + options.expires.toUTCString();
+        if(options.domain)
+            cStr += ";domain=" + options.domain;
+        if(options.path)
+            cStr += ";path=" + options.path;
+        if(options.secure === undefined || options.secure)
+            cStr += ";secure";
+        if(options.partitioned)
+            cStr += ";partitioned";
+
+        cStr += ";samesite=";
+        if(options.sameSite)
+            cStr += options.sameSite;
+        else
+            cStr += "lax";
 
         document.cookie = cStr;
     }
 
     public static get(name: string): string | null {
         const cName: string = encodeURIComponent(name);
+        const store = document.cookie;
         let cookie: string | null = null;
 
-        let position: number = document.cookie.search(cName + "=");
+        let position: number = store.search(cName + "=");
         if(position > -1) {
-            let cStr: string = document.cookie.substring(position);
+            let cStr: string = store.substring(position);
 
             position = cStr.search(";");
             if(position > -1)
@@ -30,12 +55,12 @@ export class Cookie {
 
     public static remove(name: string): void {
         const cName: string = encodeURIComponent(name);
-        document.cookie = cName + "=; SameSite=None; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+        document.cookie = cName + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT";
     }
 
-    public static async aSet(name: string, data: string, maxAge: number = -1, path: string = "/", sameSite: string = "Strict", secure: boolean = true): Promise<void> {
+    public static async aSet(name: string, data: string, options: CookieOptions = {}): Promise<void> {
         return new Promise<void>(resolve => {
-            this.set(name, data, maxAge, path, sameSite, secure);
+            this.set(name, data, options);
             resolve();
         });
     }
@@ -54,7 +79,7 @@ export class Cookie {
     }
 }
 
-export class Storage {
+export class LocalStorage {
     public static set(name: string, data: string, maxAge: number = -1): void {
         let cStr: string = encodeURIComponent(data);
         if(maxAge > 0) {

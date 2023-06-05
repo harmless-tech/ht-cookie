@@ -1,6 +1,6 @@
 {
   "name": "ht-cookie",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A very simple cookie and local storage library.",
   "repository": "https://github.com/harmless-tech/ht-cookie",
   "author": "harmless-tech",
@@ -19,6 +19,7 @@
     "require": "./dist/ht-cookie.umd.cjs"
   },
   "scripts": {
+    "dev": "vite dev",
     "build": "tsc && vite build",
     "clean": "rimraf dist",
     "lint": "eslint --ext .ts src/",

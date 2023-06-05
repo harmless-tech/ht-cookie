@@ -26,31 +26,42 @@ Using yarn:
 import { Cookie } from "ht-cookie";
 
 function s() {
-    Cookie.set(name: string, data: string, maxAge?: number, path?: string, sameSite?: string, secure?: boolean): void;
+    Cookie.set(name: string, data: string, options?: CookieOptions): void;
     Cookie.get(name: string): string | null;
     Cookie.remove(name: string): void;
 }
 
 async function a() {
-    await Cookie.aSet(name: string, data: string, maxAge?: number, path?: string, sameSite?: string, secure?: boolean) : Promise<void>;
+    await Cookie.aSet(name: string, data: string, options?: CookieOptions) : Promise<void>;
     await Cookie.aGet(name: string): Promise<string | null>;
     await Cookie.aRemove(name: string): Promise<void>;
+}
+```
+```typescript
+interface CookieOptions {
+    maxAge?: number,
+    expires?: Date,
+    domain?: string,
+    path?: string,
+    sameSite?: "strict" | "lax" | "none",
+    secure?: boolean,
+    partitioned?: boolean,
 }
 ```
 
 #### Local Storage
 ```typescript
-import { Storage } from "ht-cookie";
+import { LocalStorage } from "ht-cookie";
 
 function s() {
-    Storage.set(name: string, data: string, maxAge?: number): void;
-    Storage.get(name: string): string | null;
-    Storage.remove(name: string): void;
+    LocalStorage.set(name: string, data: string, maxAge?: number): void;
+    LocalStorage.get(name: string): string | null;
+    LocalStorage.remove(name: string): void;
 }
 
 async function a() {
-    await Storage.aSet(name: string, data: string, maxAge?: number) : Promise<void>;
-    await Storage.aGet(name: string): Promise<string | null>;
-    await Storage.aRemove(name: string): Promise<void>;
+    await LocalStorage.aSet(name: string, data: string, maxAge?: number) : Promise<void>;
+    await LocalStorage.aGet(name: string): Promise<string | null>;
+    await LocalStorage.aRemove(name: string): Promise<void>;
 }
 ```
