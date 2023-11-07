@@ -9,6 +9,7 @@ dist/
 !.yarn/releases
 
 src/*.js
+src/*.js.map
 src/*.d.ts
 
 package-lock.json
