@@ -114,7 +114,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Create Archive
-        run: tar czvf package.tar.gz dist/* README.md LICENSE package.json
+        run: tar czvf package.tar.gz dist/* src/* README.md LICENSE package.json
       - name: Upload release
         uses: ncipollo/release-action@v1
         with:

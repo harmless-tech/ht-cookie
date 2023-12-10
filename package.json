@@ -1,6 +1,6 @@
 {
   "name": "ht-cookie",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A very simple cookie and local storage library.",
   "keywords": [
     "cookie",
@@ -12,7 +12,10 @@
   "license": "MIT",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "src",
+    "LICENSE",
+    "README.md"
   ],
   "main": "./dist/ht-cookie.umd.cjs",
   "module": "./dist/ht-cookie.js",
@@ -24,18 +27,18 @@
   },
   "scripts": {
     "dev": "vite dev",
-    "build": "tsc && pnpm run types && vite build",
+    "build": "tsc && vite build && pnpm run types",
     "types": "tsc --declaration ./src/index.ts --target ESNext --lib ESNext,DOM --declarationDir dist",
     "clean": "rimraf dist src/index.js src/index.js.map src/index.d.ts",
     "lint": "eslint --ext src/",
     "lint:fix": "pnpm run lint --fix"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "eslint": "^8.53.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "eslint": "^8.55.0",
     "rimraf": "^5.0.5",
-    "typescript": "^5.2.2",
-    "vite": "^4.5.0"
+    "typescript": "^5.3.3",
+    "vite": "^5.0.7"
   }
 }

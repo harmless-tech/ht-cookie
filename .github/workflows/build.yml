@@ -101,4 +101,7 @@ jobs:
           name: dist
           path: |
             dist/*
+            src/*
             package.json
+            LICENSE
+            README.md

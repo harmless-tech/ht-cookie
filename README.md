@@ -3,9 +3,7 @@
 [![Publish](https://github.com/harmless-tech/ht-cookie/actions/workflows/publish.yml/badge.svg)](https://github.com/harmless-tech/ht-cookie/actions/workflows/publish.yml)
 [![npm](https://img.shields.io/npm/v/ht-cookie)](https://www.npmjs.com/package/ht-cookie)
 
-A very simple cookie and local storage library with no deps.
-
-~1kb when gzipped.
+A very simple cookie and local storage library with no dependencies.
 
 [NPM](https://www.npmjs.com/package/ht-cookie)
 
@@ -25,13 +23,13 @@ Using yarn:
 ```typescript
 import { Cookie } from "ht-cookie";
 
-function s() {
+function syncExample() {
     Cookie.set(name: string, data: string, options?: CookieOptions): void;
     Cookie.get(name: string): string | null;
     Cookie.remove(name: string): void;
 }
 
-async function a() {
+async function asyncExample() {
     await Cookie.aSet(name: string, data: string, options?: CookieOptions) : Promise<void>;
     await Cookie.aGet(name: string): Promise<string | null>;
     await Cookie.aRemove(name: string): Promise<void>;
@@ -53,13 +51,13 @@ interface CookieOptions {
 ```typescript
 import { LocalStorage } from "ht-cookie";
 
-function s() {
+function syncExample() {
     LocalStorage.set(name: string, data: string, maxAge?: number): void;
     LocalStorage.get(name: string): string | null;
     LocalStorage.remove(name: string): void;
 }
 
-async function a() {
+async function asyncExample() {
     await LocalStorage.aSet(name: string, data: string, maxAge?: number) : Promise<void>;
     await LocalStorage.aGet(name: string): Promise<string | null>;
     await LocalStorage.aRemove(name: string): Promise<void>;
