@@ -1,4 +1,4 @@
-import { Cookie, LocalStorage } from "../src/index.ts";
+import { Cookie, LocalStorage } from "../src/index.js";
 
 Cookie.set("hello", "world");
 console.log("Add cookie...");

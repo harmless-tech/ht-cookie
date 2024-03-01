@@ -31,14 +31,19 @@
     "types": "tsc --declaration ./src/index.ts --target ESNext --lib ESNext,DOM --declarationDir dist",
     "clean": "rimraf dist src/index.js src/index.js.map src/index.d.ts",
     "lint": "eslint --ext src/",
-    "lint:fix": "pnpm run lint --fix"
+    "lint:fix": "pnpm run lint --fix",
+    "format": "prettier --check 'src/*.ts'",
+    "format:write": "prettier --write 'src/*.ts'"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.13.2",
-    "@typescript-eslint/parser": "^6.13.2",
-    "eslint": "^8.55.0",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^3.2.5",
+    "prettier-eslint": "^16.3.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3",
-    "vite": "^5.0.7"
+    "vite": "^5.1.4"
   }
 }
