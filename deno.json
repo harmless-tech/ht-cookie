@@ -1,0 +1,22 @@
+{
+    "name": "@harmless/ht-cookie",
+    "version": "0.2.3",
+    "exports": "./src/index.ts",
+    "compilerOptions": {
+        "allowJs": false,
+        "target": "esnext",
+        "lib": ["dom", "deno.ns"]
+    },
+    "lock": false,
+    "publish": {
+        "include": [
+            "src",
+            "deno.json",
+            "LICENSE",
+            "package.json",
+            "README.md",
+            "tsconfig.json",
+            "vite.config.js"
+        ]
+    }
+}

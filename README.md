@@ -6,6 +6,7 @@
 A very simple cookie and local storage library with no dependencies.
 
 [NPM](https://www.npmjs.com/package/ht-cookie)
+[JSR](https://jsr.io/@harmless/ht-cookie)
 
 ## Add to project
 Using npm:
