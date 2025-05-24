@@ -1,21 +1,37 @@
 # HT Cookie
 [![Build](https://github.com/harmless-tech/ht-cookie/actions/workflows/build.yml/badge.svg)](https://github.com/harmless-tech/ht-cookie/actions/workflows/build.yml)
 [![Publish](https://github.com/harmless-tech/ht-cookie/actions/workflows/publish.yml/badge.svg)](https://github.com/harmless-tech/ht-cookie/actions/workflows/publish.yml)
-[![npm](https://img.shields.io/npm/v/ht-cookie)](https://www.npmjs.com/package/ht-cookie)
 
 A very simple cookie and local storage library with no dependencies.
 
-[NPM](https://www.npmjs.com/package/ht-cookie)
 [JSR](https://jsr.io/@harmless/ht-cookie)
 
+[NPM](https://www.npmjs.com/package/ht-cookie)
+
 ## Add to project
-Using npm:
-```npm add ht-cookie```
 
 Using pnpm:
+
+```pnpm add jsr:@harmless/ht-cookie```
+
 ```pnpm add ht-cookie```
 
+Using deno:
+
+```deno add jsr:@harmless/ht-cookie```
+
+```deno add ht-cookie```
+
+Using npm:
+
+```npx jsr add @harmless/ht-cookie```
+
+```npm add ht-cookie```
+
 Using yarn:
+
+```yarn add jsr:@harmless/ht-cookie```
+
 ```yarn add ht-cookie```
 
 ## How to use
