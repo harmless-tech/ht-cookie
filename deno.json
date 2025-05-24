@@ -1,10 +1,11 @@
 {
     "name": "@harmless/ht-cookie",
-    "version": "0.2.3",
+    "version": "0.2.5",
+    "license": "MIT",
     "exports": "./src/index.ts",
     "compilerOptions": {
         "allowJs": false,
-        "target": "esnext",
+        "target": "es6",
         "lib": ["dom", "deno.ns"]
     },
     "lock": false,
