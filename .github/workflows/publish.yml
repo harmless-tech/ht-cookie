@@ -86,7 +86,7 @@ jobs:
           version: ${{ env.PNPM_VERSION }}
           run_install: false
       - name: Publish
-        run: pnpm dlx jsr publish # TODO: ???
+        run: pnpm dlx jsr publish
       - name: Create Archive
         run: tar czvf package-deno.tar.gz src/* README.md LICENSE deno.json
       - name: Upload release
